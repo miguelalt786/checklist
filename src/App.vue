@@ -51,9 +51,24 @@ export default {
     removeCheck(index) {
       this.checks.splice(index, 1)
     }
+  },
+  mounted(){
+      console.log('App Mounted');
+        if (localStorage.getItem('checks'))
+            this.checks = JSON.parse(localStorage.getItem('checks'));
+    },  
+  watch: {
+    checks: {
+        handler() {
+            console.log('Todo Items array changed!');
+            localStorage.setItem('checks', JSON.stringify(this.checks));
+        },
+        deep: true
+    }
   }
 }
 </script>
+
 
 <style>
 #app {
